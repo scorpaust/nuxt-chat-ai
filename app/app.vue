@@ -1,6 +1,16 @@
+<script setup lang="ts">
+const config = useRuntimeConfig();
+
+onMounted(() => {
+  console.log(config);
+});
+</script>
+
 <template>
-  <div>
+  <UApp>
     <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </UApp>
 </template>
