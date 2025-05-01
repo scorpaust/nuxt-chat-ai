@@ -6,10 +6,9 @@ export default function useChats() {
 
   function createChat(options: { projectId?: string } = {}) {
     const id = (chats.value.length + 1).toString();
-
     const chat = {
       id,
-      title: "New Chat",
+      title: `Chat ${id}`,
       messages: [],
       projectId: options.projectId,
       createdAt: new Date(),
@@ -24,7 +23,11 @@ export default function useChats() {
   async function createChatAndNavigate(options: { projectId?: string } = {}) {
     const chat = createChat(options);
 
-    await navigateTo(`/chats/${chat.id}`);
+    if (chat.projectId) {
+      await navigateTo(`/projects/${chat.projectId}/chats/${chat.id}`);
+    } else {
+      await navigateTo(`/chats/${chat.id}`);
+    }
   }
 
   function chatsInProject(projectId: string) {
@@ -34,7 +37,7 @@ export default function useChats() {
   return {
     chats,
     createChat,
-    chatsInProject,
     createChatAndNavigate,
+    chatsInProject,
   };
 }

@@ -1,8 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<script setup lang="ts">
+const isSidebarOpen = ref(true);
+</script>
+
 <template>
   <div class="layout-container">
-    <AppHeader />
-    <main class="main-content">
+    <AppSidebar :is-open="isSidebarOpen" />
+    <AppHeader @toggle-sidebar="isSidebarOpen = !isSidebarOpen" />
+    <main
+      class="main-content transition-all duration-300 ease-in-out"
+      :class="{ 'ml-64': isSidebarOpen }"
+    >
       <slot />
     </main>
   </div>

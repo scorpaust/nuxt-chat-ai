@@ -2,7 +2,6 @@
 const appConfig = useAppConfig();
 
 const { createChatAndNavigate } = useChats();
-
 async function handleCreateChat() {
   await createChatAndNavigate();
 }
@@ -10,8 +9,10 @@ async function handleCreateChat() {
 
 <template>
   <UContainer class="page-container">
-    <span class="text-2xl font-bold mb-2">{{ appConfig.title }}</span>
-    <UButton class="button" @click="handleCreateChat">Start Chat</UButton>
+    <span class="text-2xl font-bold mb-2">
+      {{ appConfig.title }}
+    </span>
+    <UButton class="button" @click="handleCreateChat"> Start Chat </UButton>
   </UContainer>
 </template>
 

@@ -85,6 +85,7 @@ watchEffect(() => props.messages);
 /* ===== Layout & Container Styles ===== */
 .scroll-container {
   height: 70vh;
+  width: 100%;
   overflow-y: auto;
   border: 1px solid #ddd;
   padding: 1rem;
