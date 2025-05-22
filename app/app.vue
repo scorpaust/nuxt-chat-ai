@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const config = useRuntimeConfig();
+const { fetchChats } = useChats();
+const { fetchProjects } = useProjects();
+Promise.all([fetchChats(), fetchProjects()]);
 
 onMounted(() => {
   console.log(config);

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TypewriterText from "~~/layers/base/app/components/TypewriterText.vue";
 import type { ChatMessage, Chat } from "../types";
 
 const scrollContainer = ref<HTMLElement | null>(null);
@@ -44,7 +45,7 @@ watchEffect(() => props.messages);
       <template v-else>
         <div class="chat-header">
           <h1 class="title">
-            {{ chat?.title || "Untitled Chat" }}
+            <TypewriterText :text="chat.title || 'Untitled Chat'" />
           </h1>
         </div>
         <div class="messages-container">
@@ -84,11 +85,12 @@ watchEffect(() => props.messages);
 <style scoped>
 /* ===== Layout & Container Styles ===== */
 .scroll-container {
-  height: 70vh;
   width: 100%;
   overflow-y: auto;
   border: 1px solid #ddd;
   padding: 1rem;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .chat-container {
