@@ -1,12 +1,8 @@
 <script setup lang="ts">
-const config = useRuntimeConfig();
-const { fetchChats } = useChats();
+const { fetchChats, prefetchChatMessages } = useChats();
 const { fetchProjects } = useProjects();
-Promise.all([fetchChats(), fetchProjects()]);
-
-onMounted(() => {
-  console.log(config);
-});
+await Promise.all([fetchChats(), fetchProjects()]);
+await callOnce(prefetchChatMessages);
 </script>
 
 <template>

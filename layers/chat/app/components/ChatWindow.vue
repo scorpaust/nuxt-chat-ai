@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import TypewriterText from "~~/layers/base/app/components/TypewriterText.vue";
-import type { ChatMessage, Chat } from "../types";
-
-const scrollContainer = ref<HTMLElement | null>(null);
+import type { ChatMessage, Chat } from "../../shared/types/types";
 
 const props = defineProps<{
   messages: ChatMessage[];
@@ -12,28 +9,30 @@ const props = defineProps<{
 
 const emit = defineEmits(["send-message"]);
 
+const { showScrollButton, scrollToBottom, pinToBottom } = useChatScroll();
+
 function handleSendMessage(message: string) {
   emit("send-message", message);
 }
 
-const scrollContainerToBottom = (immediate = false) => {
-  const el = scrollContainer.value;
-  if (!el) return;
+watch(() => props.messages, pinToBottom, { deep: true });
 
-  const target = el.scrollHeight - el.clientHeight;
+const route = useRoute();
+const isOnProjectPage = computed(() => !!route.params.projectId);
 
-  if (immediate) {
-    el.scrollTop = target;
-  } else {
-    el.scrollTo({ top: target, behavior: "smooth" });
-  }
-};
+const isAssignModalOpen = ref(false);
 
-watchEffect(() => props.messages);
+function openAssignModal() {
+  isAssignModalOpen.value = true;
+}
+
+function closeAssignModal() {
+  isAssignModalOpen.value = false;
+}
 </script>
 
 <template>
-  <div id="scrollContainer" ref="scrollContainer" class="scroll-container">
+  <div ref="scrollContainer" class="scroll-container">
     <UContainer class="chat-container">
       <div v-if="!messages?.length" class="empty-state">
         <div class="empty-state-card">
@@ -47,6 +46,16 @@ watchEffect(() => props.messages);
           <h1 class="title">
             <TypewriterText :text="chat.title || 'Untitled Chat'" />
           </h1>
+          <UButton
+            v-if="!isOnProjectPage"
+            color="neutral"
+            variant="soft"
+            icon="i-heroicons-folder-plus"
+            size="sm"
+            @click="openAssignModal"
+          >
+            Assign to Project
+          </UButton>
         </div>
         <div class="messages-container">
           <div
@@ -62,40 +71,47 @@ watchEffect(() => props.messages);
               <MarkdownRenderer :content="message.content" />
             </div>
           </div>
+
           <span v-if="typing" class="typing-indicator"> &#9611; </span>
         </div>
 
         <div class="message-form-container">
           <div class="scroll-to-bottom-button-container">
             <UButton
+              v-if="showScrollButton"
               color="neutral"
               variant="outline"
               icon="i-heroicons-arrow-down"
               class="rounded-full shadow-sm"
-              @click="scrollContainerToBottom()"
+              @click="() => scrollToBottom()"
             />
           </div>
           <ChatInput @send-message="handleSendMessage" />
         </div>
       </template>
     </UContainer>
+
+    <LazyAssignToProjectModal
+      v-if="isAssignModalOpen"
+      :chat-id="chat.id"
+      @close="closeAssignModal"
+    />
   </div>
 </template>
 
 <style scoped>
 /* ===== Layout & Container Styles ===== */
 .scroll-container {
-  width: 100%;
   overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
   flex: 1 1 auto;
   min-height: 0;
 }
 
 .chat-container {
   max-width: 800px;
-  height: 100%;
+  height: calc(100% - 4rem);
 }
 
 /* ===== Header Styles ===== */

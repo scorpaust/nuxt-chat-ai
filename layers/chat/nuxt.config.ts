@@ -9,4 +9,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     openaiApiKey: "",
   },
+
+  nitro: {
+    storage: {
+      db: {
+        driver: 'fs',
+        base: './.data'
+      }
+    }
+  }
 });

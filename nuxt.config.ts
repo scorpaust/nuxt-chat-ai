@@ -5,14 +5,21 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
-  css: ["./layers/base/app/assets/css/main.css"],
-  modules: ["@nuxt/ui", "@nuxt/eslint", "@nuxtjs/mdc"],
-  runtimeConfig: {
-    openaiApiKey: "",
+
+  modules: ["@nuxt/eslint", "@nuxt/image"],
+
+  nitro: {
+    storage: {
+      db: {
+        driver: "fs",
+        base: "./.data",
+      },
+    },
   },
-  mdc: {
-    highlight: {
-      theme: "material-theme-palenight",
+
+  routeRules: {
+    "/": {
+      prerender: true
     },
   },
 });
