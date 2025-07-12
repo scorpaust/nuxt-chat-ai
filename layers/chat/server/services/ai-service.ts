@@ -1,6 +1,5 @@
 import { generateText, streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
-
 import type { Message, LanguageModelV1 } from "ai";
 
 export const createOpenAIModel = (apiKey: string) => {

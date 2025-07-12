@@ -1,44 +1,42 @@
 import {
   getMessagesByChatId,
   createMessageForChat,
-} from '../../../../repository/chatRepository'
+} from "../../../../repository/chatRepository";
 import {
   createOpenAIModel,
   streamChatResponse,
-} from '../../../../services/ai-service'
+} from "../../../../services/ai-service";
 
 export default defineEventHandler(async (event) => {
-  const { id } = getRouterParams(event)
+  const { id } = getRouterParams(event);
 
-  const history = await getMessagesByChatId(id)
+  const history = await getMessagesByChatId(id);
 
-  const openai = createOpenAIModel(
-    useRuntimeConfig().openaiApiKey
-  )
-  const stream = await streamChatResponse(openai, history)
+  const openai = createOpenAIModel(useRuntimeConfig().openaiApiKey);
+  const stream = await streamChatResponse(openai, history);
 
   setResponseHeaders(event, {
-    'Content-Type': 'text/html',
-    'Cache-Control': 'no-cache',
-    'Transfer-Encoding': 'chunked',
-  })
+    "Content-Type": "text/html",
+    "Cache-Control": "no-cache",
+    "Transfer-Encoding": "chunked",
+  });
 
-  let completeResponse = ''
+  let completeResponse = "";
 
   const transformStream = new TransformStream({
     transform(chunk, controller) {
-      completeResponse += chunk
-      controller.enqueue(chunk)
+      completeResponse += chunk;
+      controller.enqueue(chunk);
     },
 
     async flush() {
       await createMessageForChat({
         chatId: id,
         content: completeResponse,
-        role: 'assistant',
-      })
+        role: "assistant",
+      });
     },
-  })
+  });
 
-  return stream.pipeThrough(transformStream)
-})
+  return stream.pipeThrough(transformStream);
+});

@@ -1,6 +1,7 @@
+import type { ChatWithMessages, Message } from "../../shared/types/types";
 export default function useChats() {
-  const chats = useState<Chat[]>("chats", () => []);
-  const { data, execute, status } = useFetch<Chat[]>("/api/chats", {
+  const chats = useState<ChatWithMessages[]>("chats", () => []);
+  const { data, execute, status } = useFetch<ChatWithMessages[]>("/api/chats", {
     default: () => [],
     immediate: false,
   });
@@ -22,7 +23,7 @@ export default function useChats() {
     await Promise.all(
       recentChats.map(async (chat) => {
         try {
-          const messages = await $fetch<ChatMessage[]>(
+          const messages = await $fetch<Message[]>(
             `/api/chats/${chat.id}/messages`
           );
 
@@ -40,7 +41,7 @@ export default function useChats() {
   async function createChat(
     options: { projectId?: string; title?: string } = {}
   ) {
-    const newChat = await $fetch<Chat>("/api/chats", {
+    const newChat = await $fetch<ChatWithMessages>("/api/chats", {
       method: "POST",
       body: {
         title: options.title,
