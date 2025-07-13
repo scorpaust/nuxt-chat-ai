@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 definePageMeta({
   layout: false,
@@ -7,8 +6,19 @@ definePageMeta({
 const appConfig = useAppConfig();
 
 const { createChatAndNavigate } = useChats();
+const { isAuthenticated } = useAuth();
+
 async function handleCreateChat() {
-  await createChatAndNavigate();
+  try {
+    if (!isAuthenticated.value) {
+      await navigateTo("/login");
+    }
+
+    await createChatAndNavigate();
+  } catch (error) {
+    console.error("Failed to create new chat:", error);
+    await navigateTo("/login");
+  }
 }
 </script>
 

@@ -13,13 +13,14 @@ export default defineNuxtConfig({
       db: {
         driver: "fs",
         base: "./.data",
+        mkdirs: true,
       },
     },
   },
 
   routeRules: {
     "/": {
-      prerender: true
+      prerender: true,
     },
   },
 });

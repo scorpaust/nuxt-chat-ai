@@ -4,12 +4,13 @@ export default function useChats() {
   const { data, execute, status } = useFetch<ChatWithMessages[]>("/api/chats", {
     default: () => [],
     immediate: false,
+    headers: useRequestHeaders(["cookie"]),
   });
 
-  async function fetchChats() {
-    if (status.value !== "idle") return;
+  async function fetchChats(refresh = false) {
+    if (status.value !== "idle" && !refresh) return;
     await execute();
-    chats.value = data.value;
+    chats.value = data.value || [];
   }
 
   async function prefetchChatMessages() {
@@ -24,15 +25,20 @@ export default function useChats() {
       recentChats.map(async (chat) => {
         try {
           const messages = await $fetch<Message[]>(
-            `/api/chats/${chat.id}/messages`
+            `/api/chats/${chat.id}/messages`,
+            {
+              headers: useRequestHeaders(["cookie"]),
+            }
           );
 
-          const targetChat = chats.value.find((c) => c.id === chat.id);
+          const targetChat = chats.value.find((c) => c.id === chat.id) as
+            | ChatWithMessages
+            | undefined;
           if (targetChat) {
             targetChat.messages = messages;
           }
         } catch (error) {
-          console.error(`Failed to fetch messages for chat ${chat.id}`, error);
+          console.error(`Failed to f etch messages for chat ${chat.id}`, error);
         }
       })
     );
@@ -43,6 +49,7 @@ export default function useChats() {
   ) {
     const newChat = await $fetch<ChatWithMessages>("/api/chats", {
       method: "POST",
+      headers: useRequestHeaders(["cookie"]),
       body: {
         title: options.title,
         projectId: options.projectId,

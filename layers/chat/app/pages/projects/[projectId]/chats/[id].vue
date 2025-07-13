@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import type { Chat } from "~/types";
-
 const route = useRoute();
+
+definePageMeta({
+  middleware: "auth",
+});
+
 const {
   chat: chatFromChats,
   messages,

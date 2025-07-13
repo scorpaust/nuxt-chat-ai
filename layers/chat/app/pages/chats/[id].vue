@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: "auth",
+});
+
 const route = useRoute();
 const {
   chat: chatFromChats,
@@ -47,7 +51,7 @@ useHead({
         <UContainer class="flex justify-center items-center h-full p-4">
           <UCard variant="soft" class="min-w-md">
             <template #header>
-              <h1 class="text-lg font-bold">Error - {{ error.statusCode }}</h1>
+              <h1 class="text-lg font-bold">Error - {{ error.name }}</h1>
             </template>
 
             <p>{{ error.message }}</p>
