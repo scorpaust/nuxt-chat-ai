@@ -31,6 +31,14 @@ export default defineNuxtConfig({
       failOnError: false,
       crawlLinks: false,
     },
+
+    // Dá ao Nitro o mesmo layout de pastas que o Netlify espera
+    output: {
+      // Onde os assets estáticos vão (equivalente a "publish" no netlify.toml)
+      publicDir: ".netlify/public",
+      // Onde as Netlify Functions vão (equivalente a "functions" no netlify.toml)
+      serverDir: ".netlify/functions",
+    },
   },
 
   routeRules: {
