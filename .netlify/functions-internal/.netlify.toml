@@ -1,0 +1,10 @@
+[build]
+  # Usa pnpm para instalar e gerar o client
+  install = "pnpm install --frozen-lockfile"
+  command = "pnpm run build"
+  # Ajuste esses caminhos conforme o seu nuxt.config nitro.output
+  publish   = ".netlify/public"
+  functions = ".netlify/functions"
+
+[functions]
+  node_bundler = "nft"
