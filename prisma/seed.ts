@@ -1,4 +1,4 @@
-import pkg from "@prisma/client";
+import pkg from "@prisma/client/default.js";
 const { PrismaClient } = pkg;
 
 export const prisma = new PrismaClient();
