@@ -1,6 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 // Mock data for seeding - based on the existing mock data structure
 const MOCK_MESSAGES = [
