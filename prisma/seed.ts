@@ -1,7 +1,14 @@
-import pkg from "@prisma/client/default.js";
-const { PrismaClient } = pkg;
+// server/db.ts
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
 
-export const prisma = new PrismaClient();
+// Aqui usamos require puro para evitar o ESM resolver ".prisma/client/default"
+const { PrismaClient } = require('@prisma/client') as {
+  PrismaClient: typeof import('@prisma/client').PrismaClient
+}
+
+export const prisma = new PrismaClient()
+
 
 // Mock data for seeding - based on the existing mock data structure
 const MOCK_MESSAGES = [
