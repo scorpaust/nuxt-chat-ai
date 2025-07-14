@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/eslint", "@nuxt/image"],
 
   nitro: {
+    preset: "netlify",
     storage: {
       db: {
         driver: "fs",
@@ -16,14 +17,19 @@ export default defineNuxtConfig({
         mkdirs: true,
       },
     },
+    // 1) Diz ao Nitro para NÃO tentar bundlar estes módulos
     externals: {
-      inline: ["@prisma/client", ".prisma/client"],
+      // 'external' = fica como require/import nativo em runtime
+      external: ["@prisma/client", ".prisma/client"],
+      // limpa o inline (se tinha algo)
+      inline: [],
     },
+
+    // 2) Desliga o prerender automático (ou ajusta para não falhar)
     prerender: {
-      // desliga o crawler automático de links
-      crawlLinks: false,
-      // opcional: não falha o build se houver erro de prerender
-      failOnError: false,
+      // opcionalmente, se quiseres manter prerender, mas ignorar erros:
+      // failOnError: false,
+      // crawlLinks: false
     },
   },
 
