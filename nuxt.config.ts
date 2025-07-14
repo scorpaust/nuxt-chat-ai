@@ -17,7 +17,13 @@ export default defineNuxtConfig({
       },
     },
     externals: {
-      inline: ["@prisma/client"],
+      inline: ["@prisma/client", ".prisma/client"],
+    },
+    prerender: {
+      // desliga o crawler automático de links
+      crawlLinks: false,
+      // opcional: não falha o build se houver erro de prerender
+      failOnError: false,
     },
   },
 
