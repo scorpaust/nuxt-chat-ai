@@ -20,9 +20,9 @@ export default defineNuxtConfig({
     // 1) Diz ao Nitro para NÃO tentar bundlar estes módulos
     externals: {
       // 'external' = fica como require/import nativo em runtime
-      external: ["@prisma/client", ".prisma/client"],
+      // external: ["@prisma/client", ".prisma/client"],
       // limpa o inline (se tinha algo)
-      inline: [],
+      inline: ["@prisma/client"],
     },
 
     // 2) Desliga o prerender automático (ou ajusta para não falhar)
