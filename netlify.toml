@@ -1,0 +1,7 @@
+[build]
+  command   = "pnpm run build"
+  publish   = "dist"
+  functions = "dist/server"   # ou onde o Nitro esteja a gerar as Netlify Functions
+
+[[plugins]]
+  package = "@netlify/plugin-prisma"
