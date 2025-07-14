@@ -28,14 +28,14 @@ export default defineNuxtConfig({
     // 2) Desliga o prerender automático (ou ajusta para não falhar)
     prerender: {
       // opcionalmente, se quiseres manter prerender, mas ignorar erros:
-      // failOnError: false,
-      // crawlLinks: false
+      failOnError: false,
+      crawlLinks: false,
     },
   },
 
   routeRules: {
     "/": {
-      prerender: true,
+      prerender: false,
     },
   },
 });
