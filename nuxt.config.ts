@@ -16,6 +16,9 @@ export default defineNuxtConfig({
         mkdirs: true,
       },
     },
+    externals: {
+      inline: ["@prisma/client"],
+    },
   },
 
   routeRules: {
