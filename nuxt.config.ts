@@ -22,8 +22,8 @@ export default defineNuxtConfig({
       // 'external' = fica como require/import nativo em runtime
       // external: ["@prisma/client", ".prisma/client"],
       // limpa o inline (se tinha algo)
-      external: [],
-      inline: ["@prisma/client", ".prisma/client"],
+      external: ["@prisma/client", ".prisma/client"],
+      inline: [], // don’t inline the Prisma client
     },
 
     // 2) Desliga o prerender automático (ou ajusta para não falhar)
