@@ -1,7 +1,4 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { useAuth } from "../composables/useAuth";
-
 definePageMeta({
   layout: false,
 });

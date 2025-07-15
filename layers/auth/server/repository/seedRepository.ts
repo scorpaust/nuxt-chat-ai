@@ -1,3 +1,5 @@
+const prisma = getPrismaClient();
+
 export async function seedDemoDataForUser(userId: string) {
   // Check if user already has data to avoid duplicating
   const existingChats = await prisma.chat.findMany({
