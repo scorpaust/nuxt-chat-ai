@@ -1,4 +1,7 @@
+import { getPrismaClient } from "~~/layers/base/server/utils/prisma";
 import { seedDemoDataForUser } from "./seedRepository";
+
+const prisma = getPrismaClient();
 
 export async function findUserByProviderId(providerId: string) {
   return await prisma.user.findUnique({
