@@ -22,6 +22,7 @@ export default defineNuxtConfig({
       // 'external' = fica como require/import nativo em runtime
       // external: ["@prisma/client", ".prisma/client"],
       // limpa o inline (se tinha algo)
+      external: [],
       inline: ["@prisma/client", ".prisma/client"],
     },
 
