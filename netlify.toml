@@ -9,9 +9,3 @@
   included_files = [
     "node_modules/@prisma/client/**"
   ]
-
-[[redirects]]
-  from   = "/*"
-  to     = "/.netlify/functions/server/:splat"
-  status = 200
-  force  = true
