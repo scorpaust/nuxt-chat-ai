@@ -7,5 +7,5 @@
   # Make Prisma available in your functions
   external_node_modules = ["@prisma/client"]
   included_files = [
-    "node_modules/@prisma/client/**"s
+    "node_modules/@prisma/client/**"
   ]
