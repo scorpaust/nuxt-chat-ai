@@ -2,3 +2,6 @@
   command   = "pnpm install && pnpm run build"
   publish   = ".netlify/public"
   functions = ".netlify/functions"
+
+[functions]
+included_files = ["node_modules/@prisma/client/**/*"]
