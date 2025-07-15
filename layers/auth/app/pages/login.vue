@@ -16,7 +16,7 @@ if (isAuthenticated.value) {
 const isLoading = ref(false);
 async function handleGitHubLogin() {
   isLoading.value = true;
-  await navigateTo("/auth/github", { external: true });
+  await navigateTo("/api/auth/github", { external: true });
 }
 </script>
 
