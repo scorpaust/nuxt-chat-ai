@@ -6,6 +6,3 @@
 
 [functions]
 directory = ".netlify/functions"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs" # ou noutro plugin se precisares
