@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { fileURLToPath } from "node:url";
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
@@ -7,6 +9,8 @@ export default defineNuxtConfig({
   },
 
   modules: ["@nuxt/eslint", "@nuxt/image"],
+
+  layers: [fileURLToPath(new URL("./layers/auth", import.meta.url))],
 
   nitro: {
     preset: "netlify",
