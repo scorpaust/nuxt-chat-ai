@@ -27,6 +27,9 @@ export default defineNuxtConfig({
       ignore: ["/api/**"],
       routes: [], // no routes to prerender
     },
+    routeRules: {
+      "/api/**": { prerender: false },
+    },
     // 1) Diz ao Nitro para NÃO tentar bundlar estes módulos
     externals: {
       // 'external' = fica como require/import nativo em runtime
