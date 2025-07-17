@@ -3,7 +3,9 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
 // hold onto a single client instance
-let prisma: import("@prisma/client").PrismaClient | null = null;
+let prisma: import("@prisma/client").PrismaClient | null = import(
+  "@prisma/client"
+).PrismaClient;
 
 export function getPrismaClient() {
   // if we're in a prerender build, bail out
