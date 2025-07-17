@@ -4,9 +4,9 @@
   publish = ".netlify/public"
   functions = ".netlify/functions"
 
--[functions."*"]
--  external_node_modules = ["@prisma/client"]
--  included_files = [
--    "node_modules/@prisma/client/**",
--    "node_modules/.prisma/client/**"
--  ]
+[functions."*"]
+external_node_modules = ["@prisma/client"]
+included_files = [
+"node_modules/@prisma/client/**",
+"node_modules/.prisma/client/**"
+]
