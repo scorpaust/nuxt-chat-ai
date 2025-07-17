@@ -1,4 +1,4 @@
-const prisma = getPrismaClient();
+import prisma from "#layers/base/server/utils/prisma";
 
 export async function seedDemoDataForUser(userId: string) {
   // Check if user already has data to avoid duplicating

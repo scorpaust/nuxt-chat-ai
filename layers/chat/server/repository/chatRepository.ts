@@ -1,6 +1,4 @@
-import { getPrismaClient } from '../../../base/server/utils/prisma';
-
-const prisma = getPrismaClient()
+import prisma from "#layers/base/server/utils/prisma";
 
 export async function getAllChats() {
   return await prisma.chat.findMany({
