@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
@@ -10,34 +13,22 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/eslint", "@nuxt/image"],
 
-  image: {
-    // Ativa o provider interno (IPX)
-    provider: "ipx",
-    // Lista de domínios externos que queres autorizar
-    domains: ["avatars.githubusercontent.com"],
-    // Opcional: podes limitar formatos, tamanhos, etc.
-    // presets: {
-    //   avatar: { modifiers: { width: 80, height: 80 } }
-    // }
-  },
-
-  layers: [fileURLToPath(new URL("./layers/auth", import.meta.url))],
-
   nitro: {
     preset: "netlify",
     storage: {
       db: {
         driver: "fs",
-        base: "./.data",
-        mkdirs: true,
+        // usa caminho absoluto para garantir que funciona em dev e prod
+        base: join(__dirname, ".data"),
+        mkdirs: true, // cria pastas automaticamente
       },
     },
     prerender: {
       crawlLinks: false,
       failOnError: false,
       ignore: ["/api/**"],
-      routes: [], // no routes to prerender
-    },
+      routes: [],
+    }, // no routes to prerender
     routeRules: {
       "/api/**": { prerender: false },
     },
@@ -55,5 +46,9 @@ export default defineNuxtConfig({
       // Onde as Netlify Functions vão (equivalente a "functions" no netlify.toml)
       // serverDir: ".netlify/functions",
     },
+  },
+  image: {
+    provider: "ipx",
+    // permite proxy de github avatars
   },
 });

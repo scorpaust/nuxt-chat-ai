@@ -44,7 +44,7 @@ async function handleCreateChat() {
         </UButton>
       </div>
       <div class="hero-image">
-        <NuxtImg
+        <NuxtPicture
           src="/hero.png"
           alt="Chat Interface Preview"
           class="hero-img"
