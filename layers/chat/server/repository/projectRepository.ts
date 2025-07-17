@@ -1,4 +1,6 @@
-const prisma = getPrismaClient()
+import { getPrismaClient } from "../../../base/server/utils/prisma";
+
+const prisma = getPrismaClient();
 
 export async function getAllProjects(): Promise<Project[]> {
   return await prisma.project.findMany({

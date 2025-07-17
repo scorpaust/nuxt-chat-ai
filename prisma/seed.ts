@@ -1,6 +1,5 @@
 import { getPrismaClient } from "../layers/base/server/utils/prisma";
 
-// server/db.ts
 const prisma = getPrismaClient();
 
 // Mock data for seeding - based on the existing mock data structure
