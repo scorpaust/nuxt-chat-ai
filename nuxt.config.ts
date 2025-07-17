@@ -32,7 +32,7 @@ export default defineNuxtConfig({
       // 'external' = fica como require/import nativo em runtime
       // external: ["@prisma/client", ".prisma/client"],
       // limpa o inline (se tinha a
-      inline: ["@prisma/client", ".prisma/client"],
+      external: ["@prisma/client"],
     },
     // Dá ao Nitro o mesmo layout de pastas que o Netlify espera
     output: {
