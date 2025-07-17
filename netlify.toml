@@ -1,11 +1,12 @@
+# netlify.toml
 [build]
-  command   = "pnpm install && pnpm run build"
-  publish   = ".netlify/public"
+  command = "pnpm install && pnpm run build"
+  publish = ".netlify/public"
   functions = ".netlify/functions"
 
-[functions]
-  # Make Prisma available in your functions
-  external_node_modules = ["@prisma/client"]
-  included_files = [
-    "node_modules/@prisma/client/**"
-  ]
+-[functions."*"]
+-  external_node_modules = ["@prisma/client"]
+-  included_files = [
+-    "node_modules/@prisma/client/**",
+-    "node_modules/.prisma/client/**"
+-  ]
