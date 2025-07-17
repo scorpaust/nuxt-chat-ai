@@ -1,8 +1,8 @@
 import {
   createOpenAIModel,
   generateChatResponse,
-} from "../services/ai-service";
-import { ChatMessageSchema } from "../schemas";
+} from "#layers/chat/server/services/ai-service";
+import { ChatMessageSchema } from "#layers/chat/server/schemas";
 
 export default defineEventHandler(async (event) => {
   const { success, data } = await readValidatedBody(

@@ -1,6 +1,6 @@
 import { getAuthenticatedUserId } from "~~/layers/auth/server/utils/auth";
-import { createProject } from "../../repository/projectRepository";
-import { CreateProjectSchema } from "../../schemas";
+import { createProject } from "#layers/chat/server/repository/projectRepository";
+import { CreateProjectSchema } from "#layers/chat/server/schemas";
 
 export default defineEventHandler(async (event) => {
   const userId = await getAuthenticatedUserId(event);

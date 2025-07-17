@@ -10,6 +10,17 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/eslint", "@nuxt/image"],
 
+  image: {
+    // Ativa o provider interno (IPX)
+    provider: "ipx",
+    // Lista de domínios externos que queres autorizar
+    domains: ["avatars.githubusercontent.com"],
+    // Opcional: podes limitar formatos, tamanhos, etc.
+    // presets: {
+    //   avatar: { modifiers: { width: 80, height: 80 } }
+    // }
+  },
+
   layers: [fileURLToPath(new URL("./layers/auth", import.meta.url))],
 
   nitro: {

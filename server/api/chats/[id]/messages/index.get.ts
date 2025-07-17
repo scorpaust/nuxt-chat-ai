@@ -1,8 +1,8 @@
-import { getAuthenticatedUserId } from "~~/layers/auth/server/utils/auth";
+import { getAuthenticatedUserId } from "#layers/auth/server/utils/auth";
 import {
   getChatByIdForUser,
   getMessagesByChatId,
-} from "../../../../repository/chatRepository";
+} from "#layers/chat/server/repository/chatRepository";
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event);
@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   const userId = await getAuthenticatedUserId(event);
 
   // Verify user owns the chat
-  const chat = await getChatByIdForUser(id, userId);
+  const chat = await getChatByIdForUser(id as string, userId);
   if (!chat) {
     throw createError({
       statusCode: 404,
@@ -18,6 +18,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const messages = await getMessagesByChatId(id);
+  const messages = await getMessagesByChatId(id as string);
   return messages;
 });

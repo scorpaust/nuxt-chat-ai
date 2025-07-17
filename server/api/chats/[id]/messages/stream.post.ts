@@ -1,13 +1,13 @@
-import { getAuthenticatedUserId } from "~~/layers/auth/server/utils/auth";
+import { getAuthenticatedUserId } from "#layers/auth/server/utils/auth";
 import {
   getMessagesByChatId,
   createMessageForChat,
   getChatByIdForUser,
-} from "../../../../repository/chatRepository";
+} from "#layers/chat/server/repository/chatRepository";
 import {
   createOpenAIModel,
   streamChatResponse,
-} from "../../../../services/ai-service";
+} from "#layers/chat/server/services/ai-service";
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event);
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   const userId = await getAuthenticatedUserId(event);
 
   // Verify user owns the chat
-  const chat = await getChatByIdForUser(id, userId);
+  const chat = await getChatByIdForUser(id as string, userId);
   if (!chat) {
     throw createError({
       statusCode: 404,
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const history = await getMessagesByChatId(id);
+  const history = await getMessagesByChatId(id as string);
 
   const openai = createOpenAIModel(useRuntimeConfig().openaiApiKey);
   const stream = await streamChatResponse(openai, history);
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
 
     async flush() {
       await createMessageForChat({
-        chatId: id,
+        chatId: id as string,
         content: completeResponse,
         role: "assistant",
       });
