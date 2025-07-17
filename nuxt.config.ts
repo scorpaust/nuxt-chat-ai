@@ -39,7 +39,7 @@ export default defineNuxtConfig({
       // Onde os assets estáticos vão (equivalente a "publish" no netlify.toml)
       publicDir: ".netlify/public",
       // Onde as Netlify Functions vão (equivalente a "functions" no netlify.toml)
-      serverDir: ".netlify/functions",
+      // serverDir: ".netlify/functions",
     },
   },
   image: {
