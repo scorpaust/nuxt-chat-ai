@@ -43,7 +43,7 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    provider: "ipxstatic",
+    provider: "ipx",
     dir: "./public",
     // permite proxy de github avatars
   },
