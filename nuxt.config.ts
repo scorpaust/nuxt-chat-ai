@@ -43,7 +43,10 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    provider: "ipx",
+    provider: "filerobot",
+    filerobot: {
+      baseURL: "http://localhost:3000",
+    },
     dir: "./public",
     // permite proxy de github avatars
   },
