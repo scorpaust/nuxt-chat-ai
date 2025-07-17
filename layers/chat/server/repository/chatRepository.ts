@@ -1,3 +1,7 @@
+import { getPrismaClient } from '../../../base/server/utils/prisma';
+
+const prisma = getPrismaClient()
+
 export async function getAllChats() {
   return await prisma.chat.findMany({
     orderBy: { updatedAt: "desc" },

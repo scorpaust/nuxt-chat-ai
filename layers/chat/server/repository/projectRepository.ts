@@ -1,3 +1,5 @@
+const prisma = getPrismaClient()
+
 export async function getAllProjects(): Promise<Project[]> {
   return await prisma.project.findMany({
     orderBy: { createdAt: "asc" },
