@@ -45,7 +45,7 @@ export default defineNuxtConfig({
   image: {
     provider: "filerobot",
     filerobot: {
-      baseURL: "http://localhost:3000",
+      baseURL: "https://nuxt-chat-ai.netlify.app",
     },
     dir: "./public",
     // permite proxy de github avatars
