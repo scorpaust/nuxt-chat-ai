@@ -2,7 +2,7 @@ import {
   getAllChatsByUser,
   createChat,
 } from "#layers/chat/server/repository/chatRepository";
-import { findOrCreateUser } from "../../repository/userRepository";
+import { findOrCreateUser } from "../../../repository/userRepository";
 
 async function getRedirectUrl(userId: string): Promise<string> {
   try {
